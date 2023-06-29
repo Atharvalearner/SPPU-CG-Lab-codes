@@ -66,11 +66,10 @@ void rotateRect(int px, int py, int cx, int cy) {
 void myDisplay(void) {
     int opt;
     drawRect(100, 200);
-    // cout<<"\nEnter\n\t<1> for translation"
-    // 	"\n\t<2> for rotation"
-    // 	"\n\t<3> for scaling\n\t:";
-    // cin >> opt;
-    opt = 2;
+    cout<<"\nEnter\n\t<1> for translation"
+    "\n\t<2> for rotation"
+    "\n\t<3> for scaling\n\t:";
+    cin >> opt;
     switch (opt) {
     case 1:
         translateRect(100, 200, 50, 50);
