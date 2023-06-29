@@ -1,0 +1,56 @@
+#include <GL/glut.h>
+#include <iostream>
+using namespace std;
+float x, y, x1, y1, x2, y2, xinc, yinc, step, dx, dy;
+int i;
+void Init() {
+    glClearColor(1.0, 0.0, 0.3, 0.0);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glColor3f(0.0, 0.0, 0.0);
+    gluOrtho2D(0, 400, 0, 400);
+    glFlush();
+}
+void display() {
+    dx = abs(x2 - x1);
+    dy = abs(y2 - y1);
+    if (abs(dx) > abs(dy)) {
+        step = dx;
+    }
+    else {
+        step = dy;
+    }
+    xinc = dx / step;
+    yinc = dy / step;
+    x = x1;
+    y = y1;
+    glPointSize(1.5);
+    glBegin(GL_POINTS);
+    glVertex2f(x, y);
+    glEnd();
+    for (i = 0;i <= step;i++) {
+        x = x + xinc;
+        y = y + yinc;
+        glBegin(GL_POINTS);
+        glVertex2f(x, y);
+        glEnd();
+    }
+    glFlush();
+}
+int main(int argc, char* argv[]) {
+    cout << "enter x1: ";
+    cin >> x1;
+    cout << "enter y1: ";
+    cin >> y1;
+    cout << "enter x2: ";
+    cin >> x2;
+    cout << "enter y2: ";
+    cin >> y2;
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_RGB);
+    glutInitWindowSize(500, 500);
+    glutInitWindowPosition(10, 10);
+    glutCreateWindow("DDL ALGO");
+    Init();
+    glutDisplayFunc(display);
+    glutMainLoop();
+}

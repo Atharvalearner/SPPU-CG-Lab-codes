@@ -1,0 +1,53 @@
+#include <GL/glu.h>
+#include <GL/glut.h>
+#include <iostream>
+#include <dos.h>
+using namespace std;
+int x, y, x1, y1, x2, y2, dx, dy, p;
+void Init() {
+    glClearColor(1.0, 0.3, 0.3, 0.0);
+    glClear(GL_COLOR_BUFFER_BIT);
+    gluOrtho2D(0, 500, 0, 500);
+    glFlush();
+}
+void display() {
+    x = x1;
+    y = y1;
+    dx = x2 - x1;
+    dy = y2 - y1;
+    p = 2 * dy - dx;
+    while (x1 <= x2) {
+        glColor3f(0.0, 0.0, 0.0);
+        glPointSize(1.25);
+        glBegin(GL_POINTS);
+        glVertex2f(x, y);
+        glEnd();
+        glFlush();
+        x++;
+        if (p < 0) {
+            p = p + 2 * dy;
+        }
+        else {
+            p = p + 2 * dy - 2 * dx;
+            y++;
+        }
+    }
+}
+int main(int argc, char* argv[]) {
+    cout << "enter x1: ";
+    cin >> x1;
+    cout << "enter y1: ";
+    cin >> y1;
+    cout << "enter x2: ";
+    cin >> x2;
+    cout << "enter y2: ";
+    cin >> y2;
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_RGB);
+    glutInitWindowSize(600, 500);
+    glutInitWindowPosition(10, 10);
+    glutCreateWindow("bres_line");
+    Init();
+    glutDisplayFunc(display);
+    glutMainLoop();
+}
